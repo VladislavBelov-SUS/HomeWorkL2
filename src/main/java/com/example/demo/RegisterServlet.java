@@ -12,8 +12,6 @@ import java.sql.*;
 
 @WebServlet("/registerServlet")
 public class RegisterServlet extends HttpServlet {
-
-
     public RegisterServlet() {
         super();
     }
@@ -39,10 +37,8 @@ public class RegisterServlet extends HttpServlet {
             preparedStatement.setString(3, gender);
             preparedStatement.setString(4, course);
             preparedStatement.setString(5, userAge);
+
             preparedStatement.executeUpdate();
-
-
-
             preparedStatement.close();
             conn.close();
 
@@ -53,9 +49,7 @@ public class RegisterServlet extends HttpServlet {
                 httpSession.setAttribute("course", course);
                 request.getRequestDispatcher("welcome.jsp").forward(request, response);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
